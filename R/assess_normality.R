@@ -44,7 +44,7 @@ assess_normality <- function(data,
       )
 
     shapiro_p <- ifelse(
-      shapiro.test(df$idade)$p.value >= 0.05,
+      shapiro.test(xvar)$p.value >= 0.05,
       "Podemos assumir normalidade",
       "Não-normal"
     )
@@ -121,7 +121,7 @@ assess_normality <- function(data,
         )
 
       shapiro_p <- ifelse(
-        shapiro.test(df$idade)$p.value >= 0.05,
+        shapiro.test(xvar)$p.value >= 0.05,
         "Podemos assumir normalidade",
         "Não-normal"
       )
