@@ -18,6 +18,7 @@ assess_normality <- function(data,
                              var) {
 
   if(group == 0){
+    data <- na.omit(data)
     xvar <- na.omit(as.numeric(unlist(data[, var])))
     skewness_kurtosis <- ifelse(e1071::skewness(xvar) >= -2 &
                                   e1071::skewness(xvar) <= 2 &
@@ -61,7 +62,7 @@ assess_normality <- function(data,
     cat("\n\n")
 
     print(ggplot(
-      na.omit(data)
+      data
     ) +
       geom_histogram(aes(x = xvar, y = ..density..), colour = "black", fill = "white", size = 1) +
       stat_function(fun = dnorm,
@@ -95,6 +96,7 @@ assess_normality <- function(data,
 
     # For loop em que passamos por todos os grupos da variável "group"
     for (i in 1:n) {
+      data[[i]] <- na.omit(data[[i]])
       xvar <- na.omit(as.numeric(unlist(data[[i]][, var])))
       skewness_kurtosis <- ifelse(e1071::skewness(xvar) >= -2 &
                                     e1071::skewness(xvar) <= 2 &
@@ -138,7 +140,7 @@ assess_normality <- function(data,
       cat("\n\n")
 
       plot_hist <- ggplot(
-        na.omit(data[[i]])
+        data[[i]]
       ) +
         geom_histogram(aes(x = xvar, y = ..density..), colour = "black", fill = "white", size = 1) +
         stat_function(fun = dnorm,
